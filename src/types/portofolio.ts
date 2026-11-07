@@ -1,15 +1,31 @@
-
-export interface Hero {
+export interface ProfileData {
   name: string
-  roles: string[]
   description: string
+  email: string
+  roles: string[]
+  assets: {
+    cv_url: string | null
+    photo_url: string | null
+  }
+  social_links: Record<string, string>
 }
 
-export interface Portfolio {
-  hero: Hero
-  skills: unknown[]
-  experience: unknown[]
-  projects: unknown[]
-  education: unknown[]
-  contact: Record<string, unknown>
+export interface SkillCategory {
+  category: string
+  items: string[]
+}
+
+export interface ProfileSuccessResponse {
+  success: true
+  data: ProfileData
+}
+
+export interface ProfileNotFoundResponse {
+  success: false
+  message: string
+}
+
+export interface SkillsSuccessResponse {
+  success: true
+  data: SkillCategory[]
 }
