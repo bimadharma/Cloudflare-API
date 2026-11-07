@@ -1,17 +1,17 @@
+type Profile = {
+  id: number
+  name: string
+  description: string
+  email: string
+  cv_url: string | null
+  photo_url: string | null
+}
 
-import type { Portfolio } from '../types/portofolio'
+export const getProfile = async (db: D1Database) => {
+  const profile = await db
+    .prepare('SELECT * FROM profile WHERE id = ?')
+    .bind(1)
+    .first<Profile>()
 
-export const getPortfolio = (): Portfolio => {
-  return {
-    hero: {
-      name: 'Bima Dharma Yahya',
-      roles: ['Software Developer', 'Data Analyst'],
-      description: 'Welcome to my personal portfolio.',
-    },
-    skills: [],
-    experience: [],
-    projects: [],
-    education: [],
-    contact: {},
-  }
+  return profile
 }

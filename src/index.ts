@@ -1,18 +1,14 @@
 
 import { Hono } from 'hono'
 import portfolioRoutes from './routes/portofolio.routes'
+import type { Bindings } from './types/env'
 
-const app = new Hono()
+const app = new Hono<{ Bindings: Bindings }>()
 
-// Health check
 app.get('/', (c) => {
-  return c.json({
-    success: true,
-    message: 'Portfolio API is running!',
-  })
+  return c.text('Hello Hono!')
 })
 
-// Portfolio routes
 app.route('/api/portfolio', portfolioRoutes)
 
 export default app
